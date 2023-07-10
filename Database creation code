@@ -1,0 +1,37 @@
+import java.sql.*;
+
+public class main2 {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException{
+        insertQuery();
+        selectQuery();
+
+    }
+    static void insertQuery() throws ClassNotFoundException,SQLException
+    {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        System.out.println("Driver class Loaded");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ATM", "root", "Miller@08112002");
+        System.out.println("Connected");
+        Statement s = con.createStatement();
+        System.out.println("Statement Object Created");
+
+        int n= s.executeUpdate("insert into ATM(id,name,saving) values(4,\"Light Yagami\",80000);");
+    }
+    static void selectQuery() throws ClassNotFoundException,SQLException
+    {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        System.out.println("Driver class Loaded");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ATM", "root", "Miller@08112002");
+        System.out.println("Connected");
+        Statement s = con.createStatement();
+        System.out.println("Statement Object Created");
+
+        ResultSet rs= s.executeQuery("select * from ATM.ATM");
+
+        while(rs.next()){
+            System.out.println(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3));
+        }
+
+
+    }
+}
